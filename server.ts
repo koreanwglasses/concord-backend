@@ -1,8 +1,9 @@
-import { port, mode } from "./config"
-import bot from "./bot";
-import app from "./app";
+import { port, mode } from "./config";
+import { client } from "./bot";
+import { http } from "./app";
+import { token } from "./config.local";
 
-bot.login();
-app.listen(port);
+client.login(token);
+http.listen(port);
 console.log(`App listening on port ${port}...`);
-console.log(`Running in ${mode} mode`)
+console.log(`Running in ${mode} mode`);

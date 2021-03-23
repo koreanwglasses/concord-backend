@@ -1,12 +1,12 @@
 import { Client } from "discord.js";
-import * as config from "./config.local";
+import { io } from "./sockets";
 
-const client = new Client();
+export const client = new Client();
 
-client.on("message", (message) => {
-  console.log(message.content);
+client.on("ready", () => {
+  console.log(`Discord client ready! Logged in as ${client.user.tag}`);
 });
 
-const login = () => client.login(config.token);
-
-export default { login };
+client.on("message", (message) => {
+  io.emit("discord-message", message);
+});
